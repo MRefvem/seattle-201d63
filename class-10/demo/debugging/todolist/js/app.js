@@ -3,7 +3,7 @@
 var lastLookedAtName = '';
 
 var addDaily = document.getElementById('dailyForm');
-var addToDo = document.getElementById('todoForm');
+var addToDo = document.getElementById('todos');
 var updateDailyObjectForm = document.getElementById('dailyDetails');
 var updateTodoObjectForm = document.getElementById('todoDetails');
 var dailyListHead = document.getElementById('dailyLegend');
@@ -189,7 +189,7 @@ function addElement(tag, elementContent, parentElement) {
 function updateDaily(event) {
   event.preventDefault();
   let newDailyTaskName = event.target.taskname.value;
-  let taskDiff = event.target.difficulity.value;
+  let taskDiff = event.target.difficulty.value;
   let taskPoints = 0;
   switch (taskDiff) {
   case 'easy':
@@ -224,7 +224,7 @@ function updateToDo(event) {
   event.preventDefault();
   let newTodoTaskName = event.target.taskname.value;
   let newTodoTaskDesc = event.target.taskdescription.value;
-  let taskDiff = event.target.difficulity.value;
+  let taskDiff = event.target.difficulty.value;
   let taskDueDate = event.target.dueDate.value;
   let taskPoints = 0;
   switch (taskDiff) {
@@ -251,7 +251,6 @@ function updateToDo(event) {
   }
 }
 
-addToDo.addEventListener('submit', updateToDo);
 
 //event handler when a checkbox is clicked
 
@@ -300,77 +299,77 @@ function dailyDetailHandler(event) {
   let dailyTaskDifficulty = document.getElementById('dailyDetailTaskDifficulty');
   let displayDifficultyElement = 0;
   switch (targetedTask.value) {
-  case 1:
-    displayDifficultyElement = 0;
-    break;
-  case 3:
-    displayDifficultyElement = 1;
-    break;
-  case 5:
-    displayDifficultyElement = 2;
-    break;
-  }
-  dailyTaskDifficulty.children[displayDifficultyElement].setAttribute('selected', 'selected');
-}
-
-
-/////////to make the todo task detail form appear//////////////
-// Get the todo detail modal
-var todoDetailModal = document.getElementById('todoDetailModal');
-
-//event handler for when "Click Me" text area is clicked
-function todoDetailHandler(event) {
-  let targetedValue = event.target.previousSibling.innerHTML;
-  lastLookedAtName = targetedValue;
-  let targetedTask = '';
-  for (let i = 0; i < Task.allTasks.length; i++) {
-    if (Task.allTasks[i].name === targetedValue) {
-      targetedTask = Task.allTasks[i];
-    }
-  }
-  let todoTaskName = document.getElementById('todoDetailTaskName');
-  todoTaskName.setAttribute('value', targetedTask.name);
-  todoDetailModal.style.display = 'block';
-  let todoTaskDesc = document.getElementById('todoDetailTaskDesc');
-  todoTaskDesc.setAttribute('value', targetedTask.description);
-  let todoDueDate = document.getElementById('todoDetailDueDate');
-  todoDueDate.setAttribute('value', targetedTask.dueDate);
-  let todoTaskDifficulty = document.getElementById('todoDetailTaskDifficulty');
-  let displayDifficultyElement = 0;
-  switch (targetedTask.value) {
-  case 1:
-    displayDifficultyElement = 0;
-    break;
-  case 3:
-    displayDifficultyElement = 1;
-    break;
-  case 5:
-    displayDifficultyElement = 2;
-    break;
-  }
-  todoTaskDifficulty.children[displayDifficultyElement].setAttribute('selected', 'selected');
-}
-
-function updateCurrentTask() {
-  let newDailyTaskName = event.target.taskname.value;
-  let taskDiff = event.target.difficulity.value;
-  let taskPoints = 0;
-  switch (taskDiff) {
-  case 'easy':
-    taskPoints = 1;
-    break;
-  case 'medium':
-    taskPoints = 3;
-    break;
-  case 'hard':
-    taskPoints = 5;
-    break;
-  }
-  let bTaskUpdated = updateTask(lastLookedAtName, '', 'daily', 'end of day today', taskPoints, newDailyTaskName);
-  if(bTaskUpdated){
-    dailyDetailModal.style.display = 'none';
-    renderDaily();
-  }
+    case 1:
+      displayDifficultyElement = 0;
+      break;
+      case 3:
+        displayDifficultyElement = 1;
+        break;
+        case 5:
+          displayDifficultyElement = 2;
+          break;
+        }
+        dailyTaskDifficulty.children[displayDifficultyElement].setAttribute('selected', 'selected');
+      }
+      
+      
+      /////////to make the todo task detail form appear//////////////
+      // Get the todo detail modal
+      var todoDetailModal = document.getElementById('todoDetailModal');
+      
+      //event handler for when "Click Me" text area is clicked
+      function todoDetailHandler(event) {
+        let targetedValue = event.target.previousSibling.innerHTML;
+        lastLookedAtName = targetedValue;
+        let targetedTask = '';
+        for (let i = 0; i < Task.allTasks.length; i++) {
+          if (Task.allTasks[i].name === targetedValue) {
+            targetedTask = Task.allTasks[i];
+          }
+        }
+        let todoTaskName = document.getElementById('todoDetailTaskName');
+        todoTaskName.setAttribute('value', targetedTask.name);
+        todoDetailModal.style.display = 'block';
+        let todoTaskDesc = document.getElementById('todoDetailTaskDesc');
+        todoTaskDesc.setAttribute('value', targetedTask.description);
+        let todoDueDate = document.getElementById('todoDetailDueDate');
+        todoDueDate.setAttribute('value', targetedTask.dueDate);
+        let todoTaskDifficulty = document.getElementById('todoDetailTaskDifficulty');
+        let displayDifficultyElement = 0;
+        switch (targetedTask.value) {
+          case 1:
+            displayDifficultyElement = 0;
+            break;
+            case 3:
+              displayDifficultyElement = 1;
+              break;
+              case 5:
+                displayDifficultyElement = 2;
+                break;
+              }
+              todoTaskDifficulty.children[displayDifficultyElement].setAttribute('selected', 'selected');
+            }
+            
+            function updateCurrentTask() {
+              let newDailyTaskName = event.target.taskname.value;
+              let taskDiff = event.target.difficulty.value;
+              let taskPoints = 0;
+              switch (taskDiff) {
+                case 'easy':
+                  taskPoints = 1;
+                  break;
+                  case 'medium':
+                    taskPoints = 3;
+                    break;
+                    case 'hard':
+                      taskPoints = 5;
+                      break;
+                    }
+                    let bTaskUpdated = updateTask(lastLookedAtName, '', 'daily', 'end of day today', taskPoints, newDailyTaskName);
+                    if(bTaskUpdated){
+                      dailyDetailModal.style.display = 'none';
+                      renderDaily();
+                    }
   else{
     //TODO: write behavior for trying to update a non-existent task
   }
@@ -378,71 +377,72 @@ function updateCurrentTask() {
 
 function updateToDoTask() {
   let newDailyTaskName = event.target.taskname.value;
-  let taskDiff = event.target.difficulity.value;
+  let taskDiff = event.target.difficulty.value;
   let taskPoints = 0;
   switch (taskDiff) {
-  case 'easy':
-    taskPoints = 1;
-    break;
-  case 'medium':
-    taskPoints = 3;
-    break;
-  case 'hard':
-    taskPoints = 5;
-    break;
-  }
-  let taskDesc = event.target.taskdescription.value;
-  let taskDue = event.target.dueDate.value;
-  let bTaskUpdated = updateTask(lastLookedAtName, taskDesc, 'toDo', taskDue, taskPoints, newDailyTaskName);
-  if(bTaskUpdated){
-    todoDetailModal.style.display = 'none';
-    renderToDo();
-  }
-  else{
-    //TODO: write behavior for trying to update a non-existent task
-  }
-}
-
-function deleteCurrentTask() {
-  let bTaskRemoved = removeTask(lastLookedAtName);
-  if(bTaskRemoved){
-    dailyDetailModal.style.display = 'none';
-    renderDaily();
-  }
-  else{
-    //TODO: write behavior for a failed deletion
-  }
-}
-
-function deleteToDoTask() {
-  let bTaskRemoved = removeTask(lastLookedAtName);
-  if(bTaskRemoved){
-    todoDetailModal.style.display = 'none';
-    renderToDo();
-  }
-  else{
-    //TODO: write behavior for a failed deletion
-  }
-}
-
-updateDailyObjectForm.addEventListener('submit', updatecurrentTask);
-updateDailyObjectForm.addEventListener('reset', deletecurrentTask);
-updateTodoObjectForm.addEventListener('submit', updateToDoTask);
-updateTodoObjectForm.addEventListener('reset', deleteToDoTask);
-
-//when the date value is 12am
-//look in LS for the 'tasks'
-//parse JSON to access the array
-//grab the tasks that have task type = 'daily'
-//change status to 'open'
-//clear current dailies
-// renderDaily()
-
-//get old date
-//parse it to get old hour
-//compare it to new date
-//if not the same: run the function
-//store new date to local storage
+    case 'easy':
+      taskPoints = 1;
+      break;
+      case 'medium':
+        taskPoints = 3;
+        break;
+        case 'hard':
+          taskPoints = 5;
+          break;
+        }
+        let taskDesc = event.target.taskdescription.value;
+        let taskDue = event.target.dueDate.value;
+        let bTaskUpdated = updateTask(lastLookedAtName, taskDesc, 'toDo', taskDue, taskPoints, newDailyTaskName);
+        if(bTaskUpdated){
+          todoDetailModal.style.display = 'none';
+          renderToDo();
+        }
+        else{
+          //TODO: write behavior for trying to update a non-existent task
+        }
+      }
+      
+      function deleteCurrentTask() {
+        let bTaskRemoved = removeTask(lastLookedAtName);
+        if(bTaskRemoved){
+          dailyDetailModal.style.display = 'none';
+          renderDaily();
+        }
+        else{
+          //TODO: write behavior for a failed deletion
+        }
+      }
+      
+      function deleteToDoTask() {
+        let bTaskRemoved = removeTask(lastLookedAtName);
+        if(bTaskRemoved){
+          todoDetailModal.style.display = 'none';
+          renderToDo();
+        }
+        else{
+          //TODO: write behavior for a failed deletion
+        }
+      }
+      
+      updateDailyObjectForm.addEventListener('submit', updateCurrentTask);
+      updateDailyObjectForm.addEventListener('reset', deleteCurrentTask);
+      updateTodoObjectForm.addEventListener('submit', updateToDoTask);
+      updateTodoObjectForm.addEventListener('reset', deleteToDoTask);
+      addToDo.addEventListener('submit', updateToDo); // Moved
+      
+      //when the date value is 12am
+      //look in LS for the 'tasks'
+      //parse JSON to access the array
+      //grab the tasks that have task type = 'daily'
+      //change status to 'open'
+      //clear current dailies
+      // renderDaily()
+      
+      //get old date
+      //parse it to get old hour
+      //compare it to new date
+      //if not the same: run the function
+      //store new date to local storage
 
 
 //make it possible to force a date to be saved
